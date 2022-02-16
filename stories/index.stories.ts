@@ -9,7 +9,8 @@ export default {
     label: { control: 'text' },
     value: { control: 'text' },
     name: { control: 'text' },
-    indicatorLast: { control: 'boolean' }
+    indicatorLast: { control: 'boolean' },
+    disabled: { control: 'boolean' }
   }
 };
 
@@ -25,6 +26,7 @@ interface ArgTypes {
   value?: string;
   name?: string;
   indicatorLast?: boolean;
+  disabled?: boolean;
 }
 
 const Template: Story<ArgTypes> = (
@@ -32,11 +34,13 @@ const Template: Story<ArgTypes> = (
     label,
     value,
     name,
-    indicatorLast
+    indicatorLast,
+    disabled
   }: ArgTypes
 ) => html`
   <oui-checkbox
-    ?indicatorLast='${ifDefined(indicatorLast)}'
+    ?indicatorLast='${indicatorLast}'
+    ?disabled='${disabled}'
     .value='${ifDefined(value)}'
     .name='${ifDefined(name)}'>
     ${label}
@@ -47,3 +51,5 @@ export const Default = Template.bind({});
 Default.args = { value: 'value', name: 'name', label: 'Label' };
 export const IndicatorLast = Default.bind({});
 IndicatorLast.args = { ...Default.args, indicatorLast: true };
+export const Disabled = Default.bind({});
+Disabled.args = { ...Default.args, disabled: true};

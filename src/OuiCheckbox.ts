@@ -52,6 +52,7 @@ export class OuiCheckbox extends LitElement {
     return html`
       <input part='indicator'
              type='checkbox'
+             ?disabled='${this.disabled}'
              .value='${ifDefined(this.value)}'
              .name='${ifDefined(this.name)}' />
     `;

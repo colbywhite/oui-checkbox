@@ -1,21 +1,21 @@
 import { html } from 'lit';
 import { expect, fixture } from '@open-wc/testing';
+import type { LitHTMLRenderable } from '@open-wc/testing-helpers/src/renderable';
 import { OuiCheckbox } from '../src/OuiCheckbox.js';
 import '../src/oui-checkbox.js';
 
-describe('OuiCheckbox', () => {
-  it('passes the a11y audit', async () => {
-    const el = await fixture<OuiCheckbox>(html`
-      <oui-checkbox>Label</oui-checkbox>
-    `);
-    await expect(el).shadowDom.to.be.accessible();
-  });
+async function accessibleFixture<T extends Element>(template: LitHTMLRenderable): Promise<T> {
+  const el = await fixture<T>(template);
+  await expect(el).shadowDom.to.be.accessible();
+  return el;
+}
 
+describe('OuiCheckbox', () => {
   it('should use default props when undefined', async () => {
-    const el = await fixture<OuiCheckbox>(html`
+    const checkbox = await accessibleFixture<OuiCheckbox>(html`
       <oui-checkbox>Label</oui-checkbox>
     `);
-    const input = el.shadowRoot?.querySelector('input');
+    const input = checkbox.shadowRoot?.querySelector('input');
     expect(input).to.not.be.null;
     expect(input).attribute('part').to.equal('indicator');
     expect(input).property('type').to.equal('checkbox');
@@ -24,10 +24,10 @@ describe('OuiCheckbox', () => {
   });
 
   it('should pass input props', async () => {
-    const el = await fixture<OuiCheckbox>(html`
+    const checkbox = await accessibleFixture<OuiCheckbox>(html`
       <oui-checkbox value='value' name='name'>Label</oui-checkbox>
     `);
-    const input = el.shadowRoot?.querySelector('input');
+    const input = checkbox.shadowRoot?.querySelector('input');
     expect(input).to.not.be.null;
     expect(input).attribute('part').to.equal('indicator');
     expect(input).property('type').to.equal('checkbox');
@@ -35,11 +35,19 @@ describe('OuiCheckbox', () => {
     expect(input).property('value').to.equal('value');
   });
 
+  it('should disable input', async () => {
+    const checkbox = await accessibleFixture<OuiCheckbox>(html`
+      <oui-checkbox ?disabled='${true}'>Label</oui-checkbox>
+    `);
+    const input = checkbox.shadowRoot?.querySelector('input');
+    expect(input).property('disabled').to.equal(true);
+  });
+
   it('displays indicator last', async () => {
-    const el = await fixture<OuiCheckbox>(html`
+    const checkbox = await accessibleFixture<OuiCheckbox>(html`
       <oui-checkbox ?indicatorLast='${true}'>Label</oui-checkbox>
     `);
-    const labelChildren = el.shadowRoot
+    const labelChildren = checkbox.shadowRoot
       ?.querySelector('label')
       ?.querySelectorAll<HTMLInputElement | HTMLSlotElement>('input, slot');
     expect(labelChildren).to.not.be.null;
