@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <style>
+    body {
+      background: #fafafa;
+    }
+
+    oui-checkbox::part(indicator) {
+      -webkit-appearance: none;
+      background-color: #fbfbfb;
+      border: 1px solid #cacece;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+      padding: 9px;
+      border-radius: 3px;
+      display: inline-block;
+      position: relative;
+    }
+
+    oui-checkbox::part(indicator):active, oui-checkbox::part(indicator):checked:active {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    oui-checkbox::part(indicator):checked {
+      background-color: #e9ecee;
+      border: 1px solid #adb8c0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+      color: #99a1a7;
+    }
+
+    oui-checkbox::part(indicator):checked:after {
+      content: '\2714';
+      font-size: 14px;
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      color: #99a1a7;
+    }
+  </style>
+</head>
+<body>
+<div id='demo'></div>
+
+<script type='module'>
+  import { html, render } from 'lit';
+  import '../dist/src/oui-checkbox.js';
+
+  render(
+    html`
+      <oui-checkbox>
+        Label
+      </oui-checkbox>
+      <oui-checkbox ?indicatorLast=${true}>
+        Label
+      </oui-checkbox>
+      <oui-checkbox ?indicatorLast=${false}>
+        Label
+      </oui-checkbox>
+    `,
+    document.querySelector('#demo')
+  );
+</script>
+</body>
+</html>
