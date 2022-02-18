@@ -1,5 +1,5 @@
-import { css, html, LitElement, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { css, html, LitElement, nothing, PropertyValues } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 export class OuiCheckbox extends LitElement {
@@ -11,22 +11,19 @@ export class OuiCheckbox extends LitElement {
   @property({ type: Boolean })
   checked = false;
 
-  @property({ type: Boolean })
-  defaultChecked = false;
-
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   value = 'on';
 
   @property({ type: Boolean })
   autofocus = false;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   disabled = false;
 
   @property({ type: String })
   form = null;
 
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   name = '';
 
   @property({ type: Boolean })
@@ -35,8 +32,16 @@ export class OuiCheckbox extends LitElement {
   @property({ type: Boolean })
   readonly = false;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   indicatorLast = false;
+
+  @state()
+  private initialCheckedState: undefined | boolean;
+
+  @property({ type: Boolean, attribute: false, noAccessor: true })
+  get defaultChecked() {
+    return Boolean(this.initialCheckedState);
+  }
 
   render() {
     return html`
@@ -48,13 +53,25 @@ export class OuiCheckbox extends LitElement {
     `;
   }
 
+  protected willUpdate(changedProperties: PropertyValues) {
+    if (
+      this.initialCheckedState === undefined &&
+      changedProperties.has('checked')
+    ) {
+      this.initialCheckedState = this.checked;
+    }
+  }
+
   private indicator() {
     return html`
-      <input part='indicator'
-             type='checkbox'
-             ?disabled='${this.disabled}'
-             .value='${ifDefined(this.value)}'
-             .name='${ifDefined(this.name)}' />
+      <input
+        part='indicator'
+        type='checkbox'
+        ?checked='${this.checked}'
+        ?disabled='${this.disabled}'
+        .value='${ifDefined(this.value)}'
+        .name='${ifDefined(this.name)}'
+      />
     `;
   }
 }
