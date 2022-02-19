@@ -11,21 +11,21 @@
     "./oui-checkbox.js": "./dist/src/oui-checkbox.js"
   },
   "scripts": {
-    "analyze": "cem analyze --litelement",
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
-    "build": "tsc && npm run analyze -- --exclude dist",
-    "prepublish": "tsc && npm run analyze -- --exclude dist",
+    "prepare": "npm run build && husky install",
+    "start": "npm-run-all build -p build:watch wds",
+    "build": "tsc",
+    "postbuild": "cem analyze --litelement --exclude dist",
+    "build:watch": "tsc --watch --preserveWatchOutput",
     "eslint": "eslint --ext .ts,.html . --ignore-path .gitignore",
-    "prettier": "prettier \"**/*.ts\" --ignore-path .gitignore -c",
-    "eslint:fix": "eslint --ext .ts,.html . --fix --ignore-path .gitignore",
-    "prettier:fix": "prettier \"**/*.ts\" --ignore-path .gitignore -w",
-    "lint": "npm run eslint && npm run prettier",
-    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
-    "test": "tsc && wtr --coverage",
-    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
-    "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook",
-    "prepare": "husky install"
+    "prettier": "prettier \"**/*.ts\" --ignore-path .gitignore",
+    "lint": "run-s eslint \"prettier -c\"",
+    "lint:fix": "run-s \"eslint --fix\" \"prettier -w\"",
+    "wtr": "wtr",
+    "wds": "wds",
+    "test": "run-s build \"wtr --coverage\"",
+    "test:watch": "npm-run-all build -p build:watch \"wtr --watch\"",
+    "storybook": "npm-run-all build -p build:watch \"wds -c .storybook/server.mjs\"",
+    "storybook:build": "run-s build build-storybook"
   },
   "dependencies": {
     "lit": "^2.0.2"
@@ -39,11 +39,11 @@
     "@web/dev-server": "^0.1.28",
     "@web/dev-server-storybook": "next",
     "@web/test-runner": "next",
-    "concurrently": "^5.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.0",
     "lint-staged": "^10.5.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.2"

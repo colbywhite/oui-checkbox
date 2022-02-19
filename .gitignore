@@ -5,9 +5,10 @@
 ## system files
 .DS_Store
 
-## npm
+## npm/yarn
 /node_modules/
 /npm-debug.log
+/yarn-error.log
 
 ## testing
 /coverage/
