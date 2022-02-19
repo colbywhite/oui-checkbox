@@ -11,7 +11,7 @@
     "./oui-checkbox.js": "./dist/src/oui-checkbox.js"
   },
   "scripts": {
-    "prepare": "npm run build && husky install",
+    "prepare": "run-p analyze git:hooks",
     "start": "npm-run-all build -p build:watch wds",
     "build": "tsc",
     "postbuild": "cem analyze --litelement --exclude dist",
@@ -25,7 +25,9 @@
     "test": "run-s build \"wtr --coverage\"",
     "test:watch": "npm-run-all build -p build:watch \"wtr --watch\"",
     "storybook": "npm-run-all build -p build:watch \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "run-s build build-storybook"
+    "storybook:build": "run-s build build-storybook",
+    "analyze": "cem analyze --litelement --exclude dist",
+    "git:hooks": "husky install"
   },
   "dependencies": {
     "lit": "^2.0.2"

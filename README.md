@@ -5,7 +5,7 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Installation
 
 ```bash
-npm i oui-checkbox
+yarn add oui-checkbox
 ```
 
 ## Usage
@@ -15,62 +15,39 @@ npm i oui-checkbox
   import 'oui-checkbox/oui-checkbox.js';
 </script>
 
-<oui-checkbox></oui-checkbox>
+<style>
+  oui-checkbox::part(indicator) {
+    -webkit-appearance: none;
+    background-color: #fbfbfb;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+</style>
+
+<p>Choose your monster's features:</p>
+<oui-checkbox value="scales" name="scales" checked>
+  Scales
+</oui-checkbox>
+<oui-checkbox value="horns" name="horns">
+  Horns
+</oui-checkbox>
 ```
 
-## Linting and formatting
+## Local dev
 
-To scan the project for linting and formatting errors, run
+`yarn start`: Run local demo (i.e. `demo/index.html`)
+`yarn run build`: Build component
+`yarn run build:watch`: Continuously build component
+`yarn test`: Single test run
+`yarn run test:watch`: Continuously run tests
+`yarn run lint`: Check for lint errors
+`yarn run lint:fix`: Fix lint errors
+`yarn run storybook`: Run local Storybook server
+`yarn run storybook:build`: Build Storybook
 
-```bash
-npm run lint
-```
-
-To automatically fix linting and formatting errors, run
-
-```bash
-npm run format
-```
-
-## Testing with Web Test Runner
-
-To execute a single test run:
-
-```bash
-npm run test
-```
-
-To run the tests in interactive watch mode run:
-
-```bash
-npm run test:watch
-```
-
-## Demoing with Storybook
-
-To run a local instance of Storybook for your component, run
-
-```bash
-npm run storybook
-```
-
-To build a production version of Storybook, run
-
-```bash
-npm run storybook:build
-```
-
-
-## Tooling configs
-
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
-
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `web-dev-server`
-
-```bash
-npm start
-```
-
-To run a local development server that serves the basic demo located in `demo/index.html`
+After a local `yarn install` a build will be ran (to produce a `custom-elements.json`) and git hooks will be installed.
+This is accomplished via `yarn run prepare`.

@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang='en-GB'>
+<html lang="en-GB">
 <head>
-  <meta charset='utf-8'>
+  <meta charset="utf-8">
   <style>
     body {
       background: #fafafa;
+    }
+
+    ul {
+      list-style-type: none;
     }
 
     oui-checkbox::part(indicator) {
@@ -40,25 +44,29 @@
   </style>
 </head>
 <body>
-<div id='demo'></div>
+<main></main>
 
-<script type='module'>
-  import { html, render } from 'lit';
-  import '../dist/src/oui-checkbox.js';
+<script type="module">
+  import { html, render } from "lit";
+  import "../dist/src/oui-checkbox.js";
 
   render(
     html`
-      <oui-checkbox>
-        Label
-      </oui-checkbox>
-      <oui-checkbox ?indicatorLast=${true}>
-        Label
-      </oui-checkbox>
-      <oui-checkbox ?indicatorLast=${false}>
-        Label
-      </oui-checkbox>
+      <h1>Choose your monster's features:</h1>
+      <ul>
+        <li>
+          <oui-checkbox name="scales" checked>
+            Scales
+          </oui-checkbox>
+        </li>
+        <li>
+          <oui-checkbox name="horns">
+            Horns
+          </oui-checkbox>
+        </li>
+      </ul>
     `,
-    document.querySelector('#demo')
+    document.querySelector("main")
   );
 </script>
 </body>
