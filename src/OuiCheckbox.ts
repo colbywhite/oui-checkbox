@@ -1,6 +1,6 @@
-import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { css, html, LitElement, nothing, PropertyValues } from "lit";
+import { property, state } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export class OuiCheckbox extends LitElement {
   static styles = css`
@@ -12,7 +12,7 @@ export class OuiCheckbox extends LitElement {
   checked = false;
 
   @property({ type: String, reflect: true })
-  value = 'on';
+  value = "on";
 
   @property({ type: Boolean })
   autofocus = false;
@@ -24,7 +24,7 @@ export class OuiCheckbox extends LitElement {
   form = null;
 
   @property({ type: String, reflect: true })
-  name = '';
+  name = "";
 
   @property({ type: Boolean })
   required = false;
@@ -45,7 +45,7 @@ export class OuiCheckbox extends LitElement {
 
   render() {
     return html`
-      <label part='label'>
+      <label part="label">
         ${this.indicatorLast ? nothing : this.indicator()}
         <slot></slot>
         ${this.indicatorLast ? this.indicator() : nothing}
@@ -56,7 +56,7 @@ export class OuiCheckbox extends LitElement {
   protected willUpdate(changedProperties: PropertyValues) {
     if (
       this.initialCheckedState === undefined &&
-      changedProperties.has('checked')
+      changedProperties.has("checked")
     ) {
       this.initialCheckedState = this.checked;
     }
@@ -65,12 +65,12 @@ export class OuiCheckbox extends LitElement {
   private indicator() {
     return html`
       <input
-        part='indicator'
-        type='checkbox'
-        ?checked='${this.checked}'
-        ?disabled='${this.disabled}'
-        .value='${ifDefined(this.value)}'
-        .name='${ifDefined(this.name)}'
+        part="indicator"
+        type="checkbox"
+        ?checked="${this.checked}"
+        ?disabled="${this.disabled}"
+        .value="${ifDefined(this.value)}"
+        .name="${ifDefined(this.name)}"
       />
     `;
   }

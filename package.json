@@ -15,12 +15,17 @@
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc && npm run analyze -- --exclude dist",
     "prepublish": "tsc && npm run analyze -- --exclude dist",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "eslint": "eslint --ext .ts,.html . --ignore-path .gitignore",
+    "prettier": "prettier \"**/*.ts\" --ignore-path .gitignore -c",
+    "eslint:fix": "eslint --ext .ts,.html . --fix --ignore-path .gitignore",
+    "prettier:fix": "prettier \"**/*.ts\" --ignore-path .gitignore -w",
+    "lint": "npm run eslint && npm run prettier",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook"
+    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook",
+    "prepare": "husky install"
   },
   "dependencies": {
     "lit": "^2.0.2"
@@ -37,7 +42,7 @@
     "concurrently": "^5.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "husky": "^4.3.8",
+    "husky": "^7.0.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.4.1",
     "tslib": "^2.3.1",
@@ -67,20 +72,5 @@
         }
       ]
     }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }

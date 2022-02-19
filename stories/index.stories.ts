@@ -1,18 +1,18 @@
-import { html, TemplateResult } from 'lit';
-import '../src/oui-checkbox.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { html, TemplateResult } from "lit";
+import "../src/oui-checkbox.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export default {
-  title: 'OuiCheckbox',
-  component: 'oui-checkbox',
+  title: "OuiCheckbox",
+  component: "oui-checkbox",
   argTypes: {
-    label: { control: 'text' },
-    checked: { control: 'boolean' },
-    value: { control: 'text' },
-    name: { control: 'text' },
-    indicatorLast: { control: 'boolean' },
-    disabled: { control: 'boolean' }
-  }
+    label: { control: "text" },
+    checked: { control: "boolean" },
+    value: { control: "text" },
+    name: { control: "text" },
+    indicatorLast: { control: "boolean" },
+    disabled: { control: "boolean" },
+  },
 };
 
 interface Story<T> {
@@ -31,29 +31,20 @@ interface ArgTypes {
   checked?: boolean;
 }
 
-const Template: Story<ArgTypes> = (
-  {
-    label,
-    value,
-    name,
-    indicatorLast,
-    disabled,
-    checked
-  }: ArgTypes
-) => html`
+const Template: Story<ArgTypes> = (args: ArgTypes) => html`
   <oui-checkbox
-    ?indicatorLast='${indicatorLast}'
-    ?disabled='${disabled}'
-    ?checked='${checked}'
-    value='${ifDefined(value)}'
-    name='${ifDefined(name)}'
+    ?indicatorLast="${args.indicatorLast}"
+    ?disabled="${args.disabled}"
+    ?checked="${args.checked}"
+    value="${ifDefined(args.value)}"
+    name="${ifDefined(args.name)}"
   >
-    ${label}
+    ${args.label}
   </oui-checkbox>
 `;
 
 export const Default = Template.bind({});
-Default.args = { value: 'value', name: 'name', label: 'Label' };
+Default.args = { value: "value", name: "name", label: "Label" };
 export const Checked = Default.bind({});
 Checked.args = { ...Default.args, checked: true };
 export const IndicatorLast = Default.bind({});
