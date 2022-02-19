@@ -29,6 +29,7 @@ interface ArgTypes {
   indicatorLast?: boolean;
   disabled?: boolean;
   checked?: boolean;
+  autofocus?: boolean;
 }
 
 const Template: Story<ArgTypes> = (args: ArgTypes) => html`
@@ -36,6 +37,7 @@ const Template: Story<ArgTypes> = (args: ArgTypes) => html`
     ?indicatorLast="${args.indicatorLast}"
     ?disabled="${args.disabled}"
     ?checked="${args.checked}"
+    ?autofocus="${args.autofocus}"
     value="${ifDefined(args.value)}"
     name="${ifDefined(args.name)}"
   >
@@ -47,6 +49,8 @@ export const Default = Template.bind({});
 Default.args = { value: "value", name: "name", label: "Label" };
 export const Checked = Default.bind({});
 Checked.args = { ...Default.args, checked: true };
+export const AutoFocus = Default.bind({});
+AutoFocus.args = { ...Default.args, autofocus: true };
 export const IndicatorLast = Default.bind({});
 IndicatorLast.args = { ...Default.args, indicatorLast: true };
 export const Disabled = Default.bind({});

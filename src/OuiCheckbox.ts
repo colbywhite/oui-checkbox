@@ -11,19 +11,19 @@ export class OuiCheckbox extends LitElement {
   @property({ type: Boolean })
   checked = false;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   value = "on";
 
   @property({ type: Boolean })
   autofocus = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   disabled = false;
 
   @property({ type: String })
   form = null;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   name = "";
 
   @property({ type: Boolean })
@@ -32,7 +32,7 @@ export class OuiCheckbox extends LitElement {
   @property({ type: Boolean })
   readonly = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   indicatorLast = false;
 
   @state()
@@ -69,6 +69,7 @@ export class OuiCheckbox extends LitElement {
         type="checkbox"
         ?checked="${this.checked}"
         ?disabled="${this.disabled}"
+        ?autofocus="${this.autofocus}"
         .value="${ifDefined(this.value)}"
         .name="${ifDefined(this.name)}"
       />

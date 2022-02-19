@@ -27,8 +27,13 @@ describe("OuiCheckbox", () => {
 
   it("should pass input props", async () => {
     const checkbox = await accessibleFixture<OuiCheckbox>(html`
-      <oui-checkbox ?checked="${true}" value="value" name="name"
-        >Label
+      <oui-checkbox
+        ?checked="${true}"
+        value="value"
+        name="name"
+        ?autofocus="${true}"
+      >
+        Label
       </oui-checkbox>
     `);
     const input = checkbox.shadowRoot?.querySelector("input");
@@ -38,6 +43,7 @@ describe("OuiCheckbox", () => {
     expect(input).property("name").to.equal("name");
     expect(input).property("value").to.equal("value");
     expect(input).property("checked").to.equal(true);
+    expect(input).property("autofocus").to.equal(true);
   });
 
   [true, false].forEach((initialChecked: boolean) => {
