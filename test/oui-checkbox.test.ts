@@ -1,16 +1,8 @@
 import { html } from "lit";
-import { elementUpdated, expect, fixture } from "@open-wc/testing";
-import type { LitHTMLRenderable } from "@open-wc/testing-helpers/src/renderable";
+import { elementUpdated, expect } from "@open-wc/testing";
 import { OuiCheckbox } from "../src/OuiCheckbox.js";
 import "../src/oui-checkbox.js";
-
-async function accessibleFixture<T extends Element>(
-  template: LitHTMLRenderable
-): Promise<T> {
-  const el = await fixture<T>(template);
-  await expect(el).shadowDom.to.be.accessible();
-  return el;
-}
+import { accessibleFixture } from "./utils.js";
 
 describe("OuiCheckbox", () => {
   it("should use default props when undefined", async () => {
