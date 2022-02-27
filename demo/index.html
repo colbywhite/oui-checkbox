@@ -6,9 +6,7 @@
   </head>
   <body>
     <main>
-      <section>
-        <h1>Choose your monster's features:</h1>
-      </section>
+      <section></section>
       <section>
         <h1>Current selection</h1>
         <code> </code>
@@ -30,40 +28,43 @@
       render(
         html`
           <form>
-            <ul>
-              <li>
-                <label>
-                  <input
-                    @change="${updateSelection}"
-                    type="checkbox"
-                    name="features"
-                    value="fangs"
-                  />
-                  Fangs
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input
-                    @change="${updateSelection}"
-                    type="checkbox"
-                    name="features"
-                    value="hooves"
-                  />
-                  Hooves
-                </label>
-              </li>
-              <li>
-                <oui-checkbox name="features" value="scales" checked>
-                  Scales
-                </oui-checkbox>
-              </li>
-              <li>
-                <oui-checkbox name="features" value="horns">
-                  Horns
-                </oui-checkbox>
-              </li>
-            </ul>
+            <fieldset>
+              <legend>Choose your monster's features</legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      @change="${updateSelection}"
+                      type="checkbox"
+                      name="features"
+                      value="fangs"
+                    />
+                    Fangs
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input
+                      @change="${updateSelection}"
+                      type="checkbox"
+                      name="features"
+                      value="hooves"
+                    />
+                    Hooves
+                  </label>
+                </li>
+                <li>
+                  <oui-checkbox name="features" value="scales" checked>
+                    Scales
+                  </oui-checkbox>
+                </li>
+                <li>
+                  <oui-checkbox name="features" value="horns">
+                    Horns
+                  </oui-checkbox>
+                </li>
+              </ul>
+            </fieldset>
           </form>
         `,
         document.querySelector("main section")

@@ -1,18 +1,21 @@
-# \<oui-checkbox>
+# Open UI checkbox
 
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+This is an in-progress web component implementation of the [Open UI Proposal for a checkbox component][proposal]. At
+this point, it is meant to move forward OUI discussion.
 
-## Installation
+# Usage
 
-```bash
-yarn add oui-checkbox
-```
+This project contains two components.
 
-## Usage
+- `<oui-checkbox>`: A new component that intends to fulfil the proposal.
+- `<oui-checkbox-built-in>`: A component that extends the built in `HTMLInputComponent`.
+
+## <oui-checkbox>
 
 ```html
+
 <script type="module">
-  import 'oui-checkbox/oui-checkbox.js';
+  import "../dist/src/oui-checkbox.js";
 </script>
 
 <style>
@@ -37,17 +40,43 @@ yarn add oui-checkbox
 </oui-checkbox>
 ```
 
-## Local dev
+## <oui-checkbox-built-in>
 
-`yarn start`: Run local demo (i.e. `demo/index.html`)
-`yarn run build`: Build component
-`yarn run build:watch`: Continuously build component
-`yarn test`: Single test run
-`yarn run test:watch`: Continuously run tests
-`yarn run lint`: Check for lint errors
-`yarn run lint:fix`: Fix lint errors
-`yarn run storybook`: Run local Storybook server
-`yarn run storybook:build`: Build Storybook
+```html
+
+<script type="module">
+  import "../dist/src/oui-checkbox-built-in.js";
+</script>
+
+<form>
+  <fieldset>
+    <legend>Choose your monster's features</legend>
+    <label>
+      <input is="oui-checkbox-built-in" name="features" value="scales" />
+      Scales
+    </label>
+    <label>
+      <input is="oui-checkbox-built-in" name="features" value="horns" />
+      Horns
+    </label>
+  </fieldset>
+</form>
+```
+
+# Local dev
+
+- `yarn start`: Run local demo (i.e. `demo/index.html`)
+- `yarn run build`: Build component
+- `yarn run build:watch`: Continuously build component
+- `yarn test`: Single test run
+- `yarn run test:watch`: Continuously run tests
+- `yarn run lint`: Check for lint errors
+- `yarn run lint:fix`: Fix lint errors
+- `yarn run storybook`: Run local Storybook server
+- `yarn run storybook:build`: Build Storybook
 
 After a local `yarn install` a build will be ran (to produce a `custom-elements.json`) and git hooks will be installed.
 This is accomplished via `yarn run prepare`.
+
+
+[proposal]: https://open-ui.org/components/checkbox
