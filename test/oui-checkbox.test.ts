@@ -71,13 +71,18 @@ describe("OuiCheckbox", () => {
     const checkbox = await accessibleFixture<OuiCheckbox>(html`
       <oui-checkbox ?indicatorLast="${true}">Label</oui-checkbox>
     `);
-    const labelChildren = checkbox.shadowRoot
-      ?.querySelector("label")
-      ?.querySelectorAll<HTMLInputElement | HTMLSlotElement>("input, slot");
-    expect(labelChildren).to.not.be.null;
+    const slots = checkbox.shadowRoot?.querySelectorAll(
+      "slot[name=label-container], slot[name=indicator-container]"
+    );
+    expect(slots).to.not.be.null;
     // TODO fix tsconfig to recognize @types/node
     // @ts-ignore
-    const childTags = [...labelChildren].map((child) => child.tagName);
-    expect(childTags).to.be.ordered.members(["SLOT", "INPUT"]);
+    const slotNames = [...slots].map((slot: Element) =>
+      slot.getAttribute("name")
+    );
+    expect(slotNames).to.be.ordered.members([
+      "label-container",
+      "indicator-container",
+    ]);
   });
 });

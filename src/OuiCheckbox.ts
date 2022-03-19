@@ -5,6 +5,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export class OuiCheckbox extends LitElement {
   static styles = css`
     :host {
+      display: flex;
     }
   `;
 
@@ -45,11 +46,13 @@ export class OuiCheckbox extends LitElement {
 
   render() {
     return html`
-      <label part="label">
-        ${this.indicatorLast ? nothing : this.indicator()}
-        <slot></slot>
-        ${this.indicatorLast ? this.indicator() : nothing}
-      </label>
+      ${this.indicatorLast ? nothing : this.indicator()}
+      <slot name="label-container">
+        <label part="label" for="indicator">
+          <slot></slot>
+        </label>
+      </slot>
+      ${this.indicatorLast ? this.indicator() : nothing}
     `;
   }
 
@@ -64,15 +67,22 @@ export class OuiCheckbox extends LitElement {
 
   private indicator() {
     return html`
-      <input
-        part="indicator"
-        type="checkbox"
-        ?checked="${this.checked}"
-        ?disabled="${this.disabled}"
-        ?autofocus="${this.autofocus}"
-        .value="${ifDefined(this.value)}"
-        .name="${ifDefined(this.name)}"
-      />
+      <slot name="indicator-container">
+        <div part="indicator">
+          <slot name="indicator">
+            <input
+              id="indicator"
+              part="indicator"
+              type="checkbox"
+              ?checked="${this.checked}"
+              ?disabled="${this.disabled}"
+              ?autofocus="${this.autofocus}"
+              .value="${ifDefined(this.value)}"
+              .name="${ifDefined(this.name)}"
+            />
+          </slot>
+        </div>
+      </slot>
     `;
   }
 }
