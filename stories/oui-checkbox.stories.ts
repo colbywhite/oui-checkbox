@@ -12,6 +12,7 @@ export default {
     name: { control: "text" },
     indicatorLast: { control: "boolean" },
     disabled: { control: "boolean" },
+    required: { control: "boolean" },
   },
 };
 
@@ -30,6 +31,7 @@ interface ArgTypes {
   disabled?: boolean;
   checked?: boolean;
   autofocus?: boolean;
+  required?: boolean;
 }
 
 const Template: Story<ArgTypes> = (args: ArgTypes) => html`
@@ -38,6 +40,7 @@ const Template: Story<ArgTypes> = (args: ArgTypes) => html`
     ?disabled="${args.disabled}"
     ?checked="${args.checked}"
     ?autofocus="${args.autofocus}"
+    ?required="${args.required}"
     value="${ifDefined(args.value)}"
     name="${ifDefined(args.name)}"
   >
@@ -55,3 +58,5 @@ export const IndicatorLast = Default.bind({});
 IndicatorLast.args = { ...Default.args, indicatorLast: true };
 export const Disabled = Default.bind({});
 Disabled.args = { ...Default.args, disabled: true };
+export const Required = Default.bind({});
+Required.args = { ...Default.args, required: true };

@@ -77,6 +77,7 @@ export class OuiCheckbox extends LitElement {
               ?checked="${this.checked}"
               ?disabled="${this.disabled}"
               ?autofocus="${this.autofocus}"
+              ?required="${this.required}"
               .value="${ifDefined(this.value)}"
               .name="${ifDefined(this.name)}"
             />
