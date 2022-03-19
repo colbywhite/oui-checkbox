@@ -25,6 +25,7 @@ describe("OuiCheckbox", () => {
         name="name"
         ?autofocus="${true}"
         ?required="${true}"
+        ?readonly="${true}"
       >
         Label
       </oui-checkbox>
@@ -38,6 +39,7 @@ describe("OuiCheckbox", () => {
     expect(input).property("checked").to.equal(true);
     expect(input).property("autofocus").to.equal(true);
     expect(input).property("required").to.equal(true);
+    expect(input).property("readOnly").to.equal(true);
   });
 
   [true, false].forEach((initialChecked: boolean) => {
